@@ -18,7 +18,7 @@ Social-Media-Mockup is a beginner-friendly social media demo application that il
 
 ## Demo
 
-You can view a live demo of the application at: [https://yourusername.github.io/social-glass](https://yourusername.github.io/social-glass)
+You can view a live demo of the application at: [https://github.com/ivin-titus/Social-Media-Mockup](https://github.com/ivin-titus/Social-Media-Mockup)
 
 ## Technologies Used
 
@@ -148,7 +148,7 @@ Social-Media-Mockup/
 
 1. Clone the repository:
    ```bash
-   git clone 
+   git clone https://github.com/ivin-titus/Social-Media-Mockup
    ```
 
 2. Open `index.html` in your browser.
@@ -209,4 +209,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-Created by Ivin Titus | © 2025 under MIT License
+Created by Ivin Titus | © 2025
