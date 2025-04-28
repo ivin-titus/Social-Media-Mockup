@@ -1,6 +1,6 @@
 # Social Media Demo Project
 
-![Social Glass Preview](https://via.placeholder.com/800x400?text=Social+Glass+Demo)
+![Social Glass Preview](./files/demo.png)
 
 ## Overview
 
@@ -18,7 +18,7 @@ Social-Media-Mockup is a beginner-friendly social media demo application that il
 
 ## Demo
 
-You can view a live demo of the application at: [https://github.com/ivin-titus/Social-Media-Mockup](https://github.com/ivin-titus/Social-Media-Mockup)
+You can view a live demo of the application at: [https://social-media-mockup-ivin.vercel.app/](https://social-media-mockup-ivin.vercel.app/)
 
 ## Technologies Used
 
