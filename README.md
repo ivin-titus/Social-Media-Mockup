@@ -1,6 +1,6 @@
 # Social Media Demo Project
 
-![Social Glass Preview](./files/demo.png)
+![Social Media Demo](./files/demo.png)
 
 ## Overview
 
