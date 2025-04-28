@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Mockup</title>
+    <link rel="stylesheet" href="/files/style.css">
+    <script src="./files/script.js"></script>
+</head>
+<body>
+    <header> 
+        <h1>Social Media Mockup</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#new">New post</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Recent Posts</h2>
+            <div id="status-container"></div>
+            <div id="posts" class="loading"></div>
+        </div>
+        <div class="newpostcontainer glass">
+            <h2 id="new">Create New Post</h2>
+            <form id="formPost">
+                <input id="title" placeholder="Enter post title" type="text" required>
+                <textarea id="body" placeholder="What's on your mind?" required></textarea>
+                <input type="submit" value="Publish Post" id="submit-btn">
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Ivin Titus • All rights reserved</p>
+    </footer>
+</body>
+</html>
