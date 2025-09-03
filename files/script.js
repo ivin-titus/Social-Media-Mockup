@@ -1,38 +1,6 @@
 // LocalStorage keys
 const POSTS_STORAGE_KEY = 'socialPosts';
 
-// Initialize posts from localStorage or fetch from API if empty
-async function initializePosts() {
-    const storedPosts = getStoredPosts();
-    
-    if (storedPosts && storedPosts.length > 0) {
-        // If we have stored posts, use them
-        showPost(storedPosts);
-        showStatusMessage('Posts loaded from local storage', 'info');
-    } else {
-        // Otherwise fetch from API
-        try {
-            const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-            if (!response.ok) throw new Error('Failed to fetch posts');
-            
-            const data = await response.json();
-            const initialPosts = data.slice(0, 4);
-            
-            // Store fetched posts in localStorage
-            savePostsToStorage(initialPosts);
-            showPost(initialPosts);
-            showStatusMessage('Initial posts loaded from API', 'info');
-        } catch (error) {
-            console.error("Error fetching posts:", error);
-            document.getElementById("posts").innerHTML = `
-                <div class="glass">
-                    <p>Failed to load posts. Please try again later.</p>
-                </div>
-            `;
-            showStatusMessage('Failed to load posts from API', 'error');
-        }
-    }
-}
 
 // Get posts from localStorage
 function getStoredPosts() {
@@ -166,7 +134,80 @@ async function createPost(e) {
     }
 }
 
-
+// Delete a post by ID
+async function deletePost(postId) {
+    try {
+        // Get the post element from the DOM
+        const postElement = document.querySelector(`.post .delete-btn[data-id="${postId}"]`).closest('.post');
+        
+        // Make API request to JSONPlaceholder
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
+            method: "DELETE"
+        });
+        
+        if (!response.ok) throw new Error('Failed to delete post');
+        
+        // Get the server response
+        const responseStatus = response.status;
+        console.log("Delete response status:", responseStatus);
+        
+        // Add deletion status to the post before removing it
+        const statusMessage = document.createElement('div');
+        statusMessage.className = 'status-message success';
+        statusMessage.innerHTML = `<strong>Server Response:</strong> Post deleted successfully (Status: ${responseStatus})`;
+        
+        // Insert status message at the beginning of the post
+        postElement.insertBefore(statusMessage, postElement.firstChild);
+        
+        // Update the appearance of the post
+        postElement.style.opacity = "0.7";
+        postElement.style.borderColor = "rgba(255, 59, 59, 0.3)";
+        
+        // Disable the delete button
+        const deleteBtn = postElement.querySelector('.delete-btn');
+        deleteBtn.disabled = true;
+        deleteBtn.textContent = "Deleted";
+        deleteBtn.style.opacity = "0.5";
+        
+        // Show status message at the top
+        showStatusMessage(`Post deleted successfully (Server Status: ${responseStatus})`, 'success');
+        
+        // Update localStorage after a short delay
+        setTimeout(() => {
+            // Get existing posts
+            let existingPosts = getStoredPosts() || [];
+            
+            // Remove the deleted post
+            existingPosts = existingPosts.filter(post => post.id !== postId);
+            
+            // Save updated posts list
+            savePostsToStorage(existingPosts);
+            
+            // Remove the post from UI
+            postElement.style.height = "0";
+            postElement.style.padding = "0";
+            postElement.style.margin = "0";
+            
+            setTimeout(() => {
+                postElement.remove();
+                
+                // Show message if no posts left
+                const postDiv = document.getElementById("posts");
+                if (postDiv.children.length === 0) {
+                    postDiv.innerHTML = `
+                        <div class="glass">
+                            <p>No posts found. Be the first to create one!</p>
+                        </div>
+                    `;
+                }
+            }, 500);
+        }, 3000);
+        
+    } catch (error) {
+        console.error("Error deleting post:", error);
+        showStatusMessage('Failed to delete post. Please try again.', 'error');
+    }
+}
 
 // Display status messages
 function showStatusMessage(message, type = 'info') {
