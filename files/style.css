@@ -93,7 +93,7 @@ main {
 .post {
     position: relative;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
 }
 
 .post:hover {
