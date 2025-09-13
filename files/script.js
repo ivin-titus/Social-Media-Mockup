@@ -1,6 +1,38 @@
 // LocalStorage keys
 const POSTS_STORAGE_KEY = 'socialPosts';
 
+// Initialize posts from localStorage or fetch from API if empty
+async function initializePosts() {
+    const storedPosts = getStoredPosts();
+    
+    if (storedPosts && storedPosts.length > 0) {
+        // If we have stored posts, use them
+        showPost(storedPosts);
+        showStatusMessage('Posts loaded from local storage', 'info');
+    } else {
+        // Otherwise fetch from API
+        try {
+            const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+            if (!response.ok) throw new Error('Failed to fetch posts');
+            
+            const data = await response.json();
+            const initialPosts = data.slice(0, 4);
+            
+            // Store fetched posts in localStorage
+            savePostsToStorage(initialPosts);
+            showPost(initialPosts);
+            showStatusMessage('Initial posts loaded from API', 'info');
+        } catch (error) {
+            console.error("Error fetching posts:", error);
+            document.getElementById("posts").innerHTML = `
+                <div class="glass">
+                    <p>Failed to load posts. Please try again later.</p>
+                </div>
+            `;
+            showStatusMessage('Failed to load posts from API', 'error');
+        }
+    }
+}
 
 // Get posts from localStorage
 function getStoredPosts() {
