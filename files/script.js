@@ -16,7 +16,7 @@ async function initializePosts() {
             if (!response.ok) throw new Error('Failed to fetch posts');
             
             const data = await response.json();
-            const initialPosts = data.slice(0, 5);
+            const initialPosts = data.slice(0, 4);
             
             // Store fetched posts in localStorage
             savePostsToStorage(initialPosts);
