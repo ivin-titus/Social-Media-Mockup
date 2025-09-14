@@ -54,7 +54,7 @@ function showPost(posts) {
     if (posts.length === 0) {
         postDiv.innerHTML = `
             <div class="glass">
-                <p>No posts found. Be the first to create one!</p>
+                <p>No posts found. Be the first to create one! </p>
             </div>
         `;
         return;
