@@ -191,7 +191,7 @@ input:focus, textarea:focus {
     padding: 14px;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
 }
 
 #submit-btn:hover {
